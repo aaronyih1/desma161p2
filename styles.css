@@ -1,0 +1,42 @@
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+  	html{
+  		background-color: #3284BF;
+  	}
+  	body{
+  		margin:0 !important;
+  		overflow: hidden;
+  		background-color: #3284BF;
+  	}
+  	h1, h2, h3, h4, h5, h6, p {
+  		color:white;
+  	}
+  	h2{
+  		font-size: 7em;
+  		text-align: center;
+  	}
+  	img{
+  		width: 100%;
+  	}
+/*    video{
+      display:none !important;
+    }*/
+  	#ucla-logo{
+  		width:100%;
+  	}
+  	.button{
+  		background-color: #FFE800;
+  		color: #3284BF;
+  		display: block;
+  		width: 60%;
+  		margin: 0 auto;
+  		padding: 20px 10px;
+  		font-size: 3em;
+  		text-align: center;
+  		margin-top: 20px;
+  	}
+}
+
