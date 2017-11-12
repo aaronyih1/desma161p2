@@ -1,4 +1,4 @@
-1. Launch photo-prompt.html in your browser
+1. Launch photo-prompt.html in your mobilr browser. Must connect using https.
 2. you start on navigation screen.
 3. tap somewhere on the bottom 3rd of the screen to move to the next slide (info page)
 4. tap the black square on the top right to go to the photo-prompt screen

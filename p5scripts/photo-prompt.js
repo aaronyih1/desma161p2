@@ -16,6 +16,8 @@ var ypos;
 var heading;
 var location_list = [];
 var location_counter=0;
+var selfies=[];
+var heightSpacing = 500;
 
 function locationItem(name, latitude, longitude, description, image_var){
 	this.name = name;
@@ -83,9 +85,19 @@ function initLocations(){
 	var location1 = new locationItem("Royce Hall", 34.0728, -118.4422, "this is the description woo", royce);
 	var location2 = new locationItem("Ackerman Union", 34.0728, -118.4422, "is the cornerstone of Bruin Plaza. It contains the UCLA store, an optometry store, a mail center, ATMs, and several restaurants.", royce);
 	var location3 = new locationItem("Wooden Center", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
+	var location4 = new locationItem("Sculpture Garden", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
+	var location5 = new locationItem("Wooden Center", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
+	var location6 = new locationItem("Sculpture Garden", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
+	var location7 = new locationItem("Wooden Center", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
+	var location8 = new locationItem("Sculpture Garden", 34.0728, -118.4422, "is the main gym at UCLA. It has a rock climbing wall and almost all the weight equipment you would ever need.", royce);
 	location_list.push(location1);
 	location_list.push(location2);
 	location_list.push(location3);
+	location_list.push(location4);
+	location_list.push(location5);
+	location_list.push(location6);
+	location_list.push(location7);
+	location_list.push(location8);
 
 }
 function launchAlbum(){
@@ -100,9 +112,26 @@ function launchAlbum(){
 	pop();
 	textAlign(CENTER);
 	text(months[month()]+" "+ day()+", "+ year(), windowWidth/2, windowHeight/4);
-	image(imagetest1, (windowWidth/4)/4, 500, imagetest1.width/4, imagetest1.height/4);
-	image(imagetest1, (windowWidth/4)+(windowWidth/4)/2, 500, imagetest1.width/4, imagetest1.height/4);
-	image(imagetest1, windowWidth-((windowWidth/4)+(windowWidth/4)/4), 500, imagetest1.width/4, imagetest1.height/4);
+	// image(imagetest1, (windowWidth/4)/4, 500, imagetest1.width/4, imagetest1.height/4);
+	// image(imagetest1, (windowWidth/4)+(windowWidth/4)/2, 500, imagetest1.width/4, imagetest1.height/4);
+	// image(imagetest1, windowWidth-((windowWidth/4)+(windowWidth/4)/4), 500, imagetest1.width/4, imagetest1.height/4);
+	heightSpacing=500;
+	for (var i = 0; i<location_list.length; i++){
+		//console.log("i: "+i + " k: "+k+ " location: " + location_list[i].name);
+		console.log(heightSpacing);
+		if (i%3==0){
+			//image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), heightSpacing, selfies[i].width/4, selfies[i].height/4 );
+			// image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), , selfies[i].width/4, selfies[i].height/4 );
+			console.log("verticality loop reached! " + i);
+			if (i!=0){
+				heightSpacing += 500;
+			}
+		}
+		image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), heightSpacing, selfies[i].width/4, selfies[i].height/4 );
+		// if((i%3 != 0)){
+			
+		// }
+	}
 
 
 }
@@ -182,10 +211,10 @@ function mousePressed() {
 	  //   imagetest1= loadImage(data);
 	  // });
 	  //console.log(c);
-	  imagetest1=get();
+	  selfies.push(get());
 	  console.log("location counter: "+location_counter);
 	  //capture.remove();
-	  if(location_counter < location_list.length){
+	  if(location_counter < location_list.length-1){
 	  	location_counter++;
 	  	page="navigation";
 	  }
