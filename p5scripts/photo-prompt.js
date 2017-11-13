@@ -1,7 +1,7 @@
 var capture;
 var imagetest1;
 var imagetest2;
-var page ="navigation";
+var page ="detected";
 var months = { 1:"January", 2:"February", 3:"March", 4:"April", 5:"May", 6:"June", 7:"July", 8:"August", 9:"September", 10:"October", 11:"November", 12:"December" };
 var locationData;
 var distance="";
@@ -20,7 +20,7 @@ var wooden;
 var fowler;
 
 //////////////////////////
-
+var map;
 var camera;
 var ypos;
 var heading;
@@ -45,8 +45,9 @@ function preload(){
 	wooden = loadImage("imgs/wooden.jpg");
 	fowler = loadImage("imgs/fowler.jpg");
 	uclaLogo = loadImage("imgs/ucla-logo.jpg");
-	img = loadImage("imgs/white-arrow.png");
+	img = loadImage("imgs/yellow-arrow.png");
 	camera = loadImage("imgs/camera.png");
+	map = loadImage("imgs/map.png");
 
 	locationData =  p5.prototype.getCurrentPosition(updatePos);
 }
@@ -91,7 +92,7 @@ function draw() {
 	    	launchAlbum();
 	    	break;
 	    default:
-	        // home();
+	        detected();
 	}
 	if(mouseIsPressed){
 
@@ -118,6 +119,33 @@ function initLocations(){
 	// location_list.push(location7);
 	// location_list.push(location8);
 
+}
+function detected(){
+	background("#3284BF");
+	push();
+	scale(windowWidth/uclaLogo.width);
+	image(uclaLogo,0,280);
+	pop();
+	fill("white");
+	textSize(100);
+	textAlign(CENTER);
+	text("You've been detected at", windowWidth/20, 150, windowWidth-(windowWidth/10));
+	push();
+	scale(windowWidth/map.width);
+	image(map, 0, 1100);
+	pop();
+	push();
+	fill("#FFE800");
+	noStroke();
+	rect(windowWidth/10, 1300, 8*windowWidth/10, 100);
+	pop();
+	push();
+	textSize(50);
+	fill("#3284BF");
+	textAlign(CENTER);
+	text("Explore UCLA!", 0, 1370, windowWidth);
+	pop();
+	locationData =  p5.prototype.getCurrentPosition(updatePos);
 }
 function launchAlbum(){
 	page="album";
@@ -182,9 +210,10 @@ function navigation(){
 		// text(locationData.latitude, 100, 100);
 		fill("white");
 		textSize(100);
+		textAlign(CENTER);
 		//console.log(locationData);
 		//console.log(locationData.heading);
-		text(distance + " mi", 350, 200);
+		text(distance + " mi", 0, 200, windowWidth);
 		window.addEventListener('deviceorientation', function(e) {
 			heading = e.webkitCompassHeading;
 		 }, false);
@@ -272,5 +301,8 @@ function mousePressed() {
 	else if ((mouseX <= (windowWidth)-100 && mouseX>=(windowWidth)-200)&&(mouseY>=9*(windowHeight/10) && mouseY<=9*(windowHeight/10)+100) && page=="site-info") {
 		// console.log("clicked");
 		page="photo-prompt";
+	}
+	else if ((mouseX <= 9*windowWidth/10 && mouseX>= windowWidth/10) &&(mouseY>=1300 && mouseY<=1400) && (page=="detected")) {
+		page="navigation";
 	}
 }
