@@ -217,7 +217,9 @@ function navigation(){
 		window.addEventListener('deviceorientation', function(e) {
 			heading = e.webkitCompassHeading;
 		 }, false);
-		var a = atan(height/width);
+		var a = atan((locationData.longitude-location_list[location_counter].longitude)/(locationData.latitude-location_list[location_counter].latitude));
+		//var a = atan(height/width);
+		console.log(a);
 		//console.log(a);
 		translate(width/2, height/2);
 		//text("value: " + a-heading, 0, 250);
