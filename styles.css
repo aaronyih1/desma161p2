@@ -21,9 +21,12 @@
   	img{
   		width: 100%;
   	}
-/*    video{
-      display:none !important;
-    }*/
+    video{
+      /*display:none !important;*/
+      position: absolute;
+      left: 10000px;
+
+    }
   	#ucla-logo{
   		width:100%;
   	}

@@ -58,7 +58,7 @@ function setup() {
 	capture = createCapture(constraints);
 	capture.elt.setAttribute('playsinline', true);
 	capture.elt.setAttribute('autoplay', true);
-	capture.hide();
+	//capture.hide();
 	initLocations();
 	//console.log(location_list);
 	coord1=location_list[0].latitude;
@@ -219,13 +219,14 @@ function navigation(){
 		 }, false);
 		var a = atan((locationData.longitude-location_list[location_counter].longitude)/(locationData.latitude-location_list[location_counter].latitude));
 		//var a = atan(height/width);
-		console.log(a);
+		//console.log((locationData.latitude-location_list[location_counter].latitude));
 		//console.log(a);
+		a = p5.prototype.map(a, -180, 180, 0, 360);
 		translate(width/2, height/2);
 		//text("value: " + a-heading, 0, 250);
 		push();
 		imageMode(CENTER);
-		rotate(a-heading);
+		rotate(-(a+heading));
 		image(img, 0,0);
 		//rect(-20, -5, 40, 10);  Larger rectangle is rotating in degrees
 		pop();
