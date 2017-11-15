@@ -58,31 +58,21 @@ function setup() {
 	capture = createCapture(constraints);
 	capture.elt.setAttribute('playsinline', true);
 	capture.elt.setAttribute('autoplay', true);
-	//capture.hide();
 	initLocations();
-	//console.log(location_list);
 	coord1=location_list[0].latitude;
 	coord2=location_list[0].longitude;
 	angleMode(DEGREES);
 	ellipseMode(CORNER);
-	  	//if(geoCheck() == true){
-			//geolocation is available
-		//}else{
-			//error getting geolocaion
-		//}
-	// // capture.size(windowWidth, windowHeight);
-	// imagetest2=loadImage(imagetest1);
+
 }
 
 
 function draw() {
-	//console.log(page);
 	switch(page) {
 		case "navigation":
 			navigation();
 		    break;
 		case "site-info":
-			//console.log(location_list[location_counter]);
 			siteInfo(location_list[location_counter]);
 			break;
 	    case "photo-prompt":
@@ -116,8 +106,6 @@ function initLocations(){
 	location_list.push(location5);
 	location_list.push(location4);
 	location_list.push(location8);
-	// location_list.push(location7);
-	// location_list.push(location8);
 
 }
 function detected(){
@@ -150,7 +138,6 @@ function detected(){
 function launchAlbum(){
 	page="album";
 	background("#3284BF");
-	//document.getElementsByTagName("video").remove();
 	fill("white");
 	textSize(50);
 	push();
@@ -159,25 +146,14 @@ function launchAlbum(){
 	pop();
 	textAlign(CENTER);
 	text(months[month()]+" "+ day()+", "+ year(), windowWidth/2, windowHeight/3.3);
-	// image(imagetest1, (windowWidth/4)/4, 500, imagetest1.width/4, imagetest1.height/4);
-	// image(imagetest1, (windowWidth/4)+(windowWidth/4)/2, 500, imagetest1.width/4, imagetest1.height/4);
-	// image(imagetest1, windowWidth-((windowWidth/4)+(windowWidth/4)/4), 500, imagetest1.width/4, imagetest1.height/4);
 	heightSpacing=500;
 	for (var i = 0; i<location_list.length; i++){
-		//console.log("i: "+i + " k: "+k+ " location: " + location_list[i].name);
-		//console.log(heightSpacing);
 		if (i%3==0){
-			//image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), heightSpacing, selfies[i].width/4, selfies[i].height/4 );
-			// image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), , selfies[i].width/4, selfies[i].height/4 );
-			//console.log("verticality loop reached! " + i);
 			if (i!=0){
 				heightSpacing += 400;
 			}
 		}
 		image(selfies[i], ((((i%3)+1)*(windowWidth/4)/4)+(i%3*(windowWidth/4))), heightSpacing, selfies[i].width/4, selfies[i].height/4 );
-		// if((i%3 != 0)){
-			
-		// }
 	}
 
 
@@ -190,7 +166,6 @@ function photoPrompt(){
 		image(capture, -(capture.width*2.2), 0, height*capture.width/capture.height, height);
 	}
 	pop();
-	// shutterToggle(capturing);
 	push();
 	noFill();
 	strokeWeight(4);
@@ -198,37 +173,24 @@ function photoPrompt(){
 	ellipse((windowWidth/2)-50, 10*(windowHeight/11), 100, 100);
 	pop();
 	locationData =  p5.prototype.getCurrentPosition(updatePos);
-	//image(imagetest1, 0, 0);
-	// image(imagetest1, 0, 0, windowWidth, windowHeight);
-	//siteInfo();
 }
 function navigation(){
 	if (locationData.latitude) {
 		background("#3284BF");
-		// updatePos(p5.prototype.getCurrentPosition());
-		//console.log(locationData);
-		// text(locationData.latitude, 100, 100);
 		fill("white");
 		textSize(100);
 		textAlign(CENTER);
-		//console.log(locationData);
-		//console.log(locationData.heading);
 		text(distance + " mi", 0, 200, windowWidth);
 		window.addEventListener('deviceorientation', function(e) {
 			heading = e.webkitCompassHeading;
 		 }, false);
 		var a = atan((locationData.longitude-location_list[location_counter].longitude)/(locationData.latitude-location_list[location_counter].latitude));
-		//var a = atan(height/width);
-		//console.log((locationData.latitude-location_list[location_counter].latitude));
-		//console.log(a);
 		a = p5.prototype.map(a, -180, 180, 0, 360);
 		translate(width/2, height/2);
-		//text("value: " + a-heading, 0, 250);
 		push();
 		imageMode(CENTER);
 		rotate(-(a+heading));
 		image(img, 0,0);
-		//rect(-20, -5, 40, 10);  Larger rectangle is rotating in degrees
 		pop();
 
 	}
@@ -238,10 +200,7 @@ function siteInfo(){
 	if (location_list[location_counter]){
 		fill("white");
 		var location_holder = location_list[location_counter];
-		//console.log(location_holder.name);
-		//yPos= windowHeight-royce.height;
 		background("#3284BF");
-		//rect(0, ypos, windowWidth, windowHeight);
 		image(location_holder.image_var, 0, 0, windowWidth, windowWidth*(location_holder.image_var.height/location_holder.image_var.width));
 		text(location_holder.name, windowWidth/20, windowWidth*(location_holder.image_var.height/location_holder.image_var.width)+150, 9*(windowWidth/10));
 		push();
@@ -250,45 +209,23 @@ function siteInfo(){
 		pop();
 		fill("black");
 		image(camera, (windowWidth)-200, 9*(windowHeight/10), 100, 100);
-		//rect((windowWidth/2)-50, 9*(windowHeight/10), 100, 100);
 	}
 }
 
 function updatePos(location) {
 	locationData = location;
-	// console.log("wooo");
-	//console.log(locationData);
 	console.log(location_list[location_counter].longitude);
 	distance=Math.round(100*calcGeoDistance(locationData.latitude,locationData.longitude, location_list[location_counter].latitude,location_list[location_counter].longitude))/100;
 	console.log(distance);
 	heightAngle = abs((location_list[location_counter].longitude)-locationData.longitude);
 	widthAngle = abs(location_list[location_counter].latitude-locationData.latitude);
 }
-// function shutterToggle(capturing){
-// 	if (capturing = true){
-// 		noFill();
-// 		rect(30, 20, 55, 55);
-// 		capturing = false;
-// 	}
-// 	else{
-// 		fill("black");
-// 		rect(30, 20, 55, 55);
-// 	}
 
-// }
 function mousePressed() {
 	if ((mouseX <= (windowWidth/2)+50 && mouseX>=(windowWidth/2)-100) && (mouseY>=9*(windowHeight/10) && mouseY<=9*(windowHeight/10)+100) && page=="photo-prompt") {
-	  //console.log("click!");
-	  // saveFrames("out", "png", 1, 1, function(data){
-	  //   print(data);
-	  //   imagetest1= loadImage(data);
-	  // });
-	  //console.log(c);
 	  capturing = true;
-	  //shutterToggle(capturing);
 	  selfies.push(get());
 	  console.log("location counter: "+location_counter);
-	  //capture.remove();
 	  if(location_counter < location_list.length-1){
 	  	location_counter++;
 	  	page="navigation";
@@ -302,7 +239,6 @@ function mousePressed() {
 	  page="site-info";
 	}
 	else if ((mouseX <= (windowWidth)-100 && mouseX>=(windowWidth)-200)&&(mouseY>=9*(windowHeight/10) && mouseY<=9*(windowHeight/10)+100) && page=="site-info") {
-		// console.log("clicked");
 		page="photo-prompt";
 	}
 	else if ((mouseX <= 9*windowWidth/10 && mouseX>= windowWidth/10) &&(mouseY>=1300 && mouseY<=1400) && (page=="detected")) {
